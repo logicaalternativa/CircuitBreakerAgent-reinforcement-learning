@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    
+  <appender name="Trace" class="ch.qos.logback.core.FileAppender">
+    <file>/home/miguel/Codigo/UOC/trabajoFinCarrera/circuitBreakerAgent/logs/Trace.log</file>
+      <encoder>
+        <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+       </encoder>
+    </appender>
+    
+  <appender name="Agent" class="ch.qos.logback.core.FileAppender">
+    <file>/home/miguel/Codigo/UOC/trabajoFinCarrera/circuitBreakerAgent/logs/Agent.log</file>
+    <encoder>
+      <pattern>%d{yyyy-MM-dd HH:mm:ss} - %msg%n</pattern>
+     </encoder>
+  </appender>
+  
+  
+    
+  <appender name="AgentMetrics" class="ch.qos.logback.core.FileAppender">
+    <file>/home/miguel/Codigo/UOC/trabajoFinCarrera/circuitBreakerAgent/logs/AgentMetrics.log</file>
+    <encoder>
+      <pattern>%msg%n</pattern>
+     </encoder>
+  </appender>
+  
+  <appender name="CSV_Signals" class="ch.qos.logback.core.FileAppender">
+    <file>/home/miguel/Codigo/UOC/trabajoFinCarrera/circuitBreakerAgent/logs/Signals.log</file>
+    <encoder>
+      <pattern>%msg%n</pattern>
+    </encoder>
+  </appender>
+  
+  <appender name="CSV_Load" class="ch.qos.logback.core.FileAppender">
+    <file>/home/miguel/Codigo/UOC/trabajoFinCarrera/circuitBreakerAgent/logs/Load.log</file>
+    <encoder>
+      <pattern>%msg%n</pattern>
+    </encoder>
+  </appender>
+    
+  <appender name="CSV_Backend" class="ch.qos.logback.core.FileAppender">
+    <file>/home/miguel/Codigo/UOC/trabajoFinCarrera/circuitBreakerAgent/logs/Backend.log</file>
+    <encoder>
+      <pattern>%msg%n</pattern>
+    </encoder>
+  </appender>
+  
+   <appender name="AgentMetrics_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+    <appender-ref ref="AgentMetrics" />
+  </appender>
+  
+   <appender name="CSV_Signals_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+    <appender-ref ref="CSV_Signals" />
+  </appender>
+  
+   <appender name="CSV_Load_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+    <appender-ref ref="CSV_Load" />
+  </appender>
+  
+   <appender name="CSV_Backend_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+    <appender-ref ref="CSV_Backend" />
+  </appender>
+  
+   <appender name="Agent_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+    <appender-ref ref="Agent" />
+  </appender>
+  
+   <appender name="Trace_ASYNC" class="ch.qos.logback.classic.AsyncAppender">
+    <appender-ref ref="Trace" />
+  </appender>
+
+    <logger name="Load" level="info" additivity="false">
+        <appender-ref ref="CSV_Load_ASYNC" />
+    </logger>
+
+    <logger name="Signals" level="info" additivity="false">
+        <appender-ref ref="CSV_Signals_ASYNC" />
+    </logger>
+
+    <logger name="QAgent-metrics" level="debug" additivity="false">
+        <appender-ref ref="AgentMetrics_ASYNC" />
+    </logger>
+
+    <logger name="Backend" level="debug" additivity="false">
+        <appender-ref ref="CSV_Backend_ASYNC" />
+    </logger>
+
+    <logger name="com.logicaalternativa.circuitbreakeragent.agent.QAgent" level="debug" additivity="true">
+        <appender-ref ref="Agent_ASYNC" />
+    </logger>
+
+    <root level="info">
+        <appender-ref ref="STDOUT" />
+        <appender-ref ref="Trace_ASYNC" />
+    </root>
+
+</configuration>
