@@ -44,7 +44,7 @@ class QLearning( private val configQLearning: ConfigQLearning, private val stepS
   }
   
   
-  val qs =  {
+  val qs = {
      
      val listAction = ( listState map { action( _ ) } )
    
@@ -57,7 +57,7 @@ class QLearning( private val configQLearning: ConfigQLearning, private val stepS
          }
      
       }
-   }
+  }
   
   private def action( to: Duration ) = new Action[Duration] {
       
@@ -67,7 +67,7 @@ class QLearning( private val configQLearning: ConfigQLearning, private val stepS
       
       def apply( other : Duration ) = to
       
-   }
+  }
   
   
   val agent = QAgent( qs, stepSize, discountRate, epsilon )

@@ -38,7 +38,7 @@ object LoadSimulatorSuite {
   
   val f = AccelationConst(gradient = Random.nextFloat() * Random.nextInt(10), rest = Random.nextFloat() * Random.nextInt(10))
   
-  implicit val ec = ExecutionContext.global
+  implicit val ec: ExecutionContext = ExecutionContext.global
   
 }
 

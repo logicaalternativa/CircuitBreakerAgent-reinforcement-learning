@@ -16,9 +16,9 @@ object ConnectorLoggerSuite {
   import functions._
   
   
-  implicit val ec = ExecutionContext.global
+  implicit val ec: ExecutionContext = ExecutionContext.global
   
-  implicit val period = Period( millis = 200 )
+  implicit val period : Period = Period( millis = 200 )
   
   def reportInputSimulatorFactory = Mother.reportSimulatorFactory( Backend ) _
   

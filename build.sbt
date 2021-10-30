@@ -2,7 +2,7 @@ name := "circuitbreaker-agent"
 
 version := "1.0"
 
-scalaVersion := "2.13.4"
+scalaVersion := "3.0.2"
 
 cancelable in Global := true
 // fork in run := true
