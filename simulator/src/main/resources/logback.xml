@@ -8,14 +8,14 @@
     </appender>
     
   <appender name="Trace" class="ch.qos.logback.core.FileAppender">
-    <file>/home/miguel/Codigo/UOC/trabajoFinCarrera/circuitBreakerAgent/logs/Trace.log</file>
+    <file>./logs/Trace.log</file>
       <encoder>
         <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
        </encoder>
     </appender>
     
   <appender name="Agent" class="ch.qos.logback.core.FileAppender">
-    <file>/home/miguel/Codigo/UOC/trabajoFinCarrera/circuitBreakerAgent/logs/Agent.log</file>
+    <file>./logs/Agent.log</file>
     <encoder>
       <pattern>%d{yyyy-MM-dd HH:mm:ss} - %msg%n</pattern>
      </encoder>
@@ -24,28 +24,28 @@
   
     
   <appender name="AgentMetrics" class="ch.qos.logback.core.FileAppender">
-    <file>/home/miguel/Codigo/UOC/trabajoFinCarrera/circuitBreakerAgent/logs/AgentMetrics.log</file>
+    <file>./logs/AgentMetrics.log</file>
     <encoder>
       <pattern>%msg%n</pattern>
      </encoder>
   </appender>
   
   <appender name="CSV_Signals" class="ch.qos.logback.core.FileAppender">
-    <file>/home/miguel/Codigo/UOC/trabajoFinCarrera/circuitBreakerAgent/logs/Signals.log</file>
+    <file>./logs/Signals.log</file>
     <encoder>
       <pattern>%msg%n</pattern>
     </encoder>
   </appender>
   
   <appender name="CSV_Load" class="ch.qos.logback.core.FileAppender">
-    <file>/home/miguel/Codigo/UOC/trabajoFinCarrera/circuitBreakerAgent/logs/Load.log</file>
+    <file>./logs/Load.log</file>
     <encoder>
       <pattern>%msg%n</pattern>
     </encoder>
   </appender>
     
   <appender name="CSV_Backend" class="ch.qos.logback.core.FileAppender">
-    <file>/home/miguel/Codigo/UOC/trabajoFinCarrera/circuitBreakerAgent/logs/Backend.log</file>
+    <file>./logs/Backend.log</file>
     <encoder>
       <pattern>%msg%n</pattern>
     </encoder>

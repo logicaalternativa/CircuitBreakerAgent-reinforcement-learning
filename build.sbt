@@ -6,10 +6,9 @@ ThisBuild / scalaVersion := "3.0.2"
 
 name := "circuitbreaker-agent"
 
-cancelable in Global := true
+Global / cancelable := true
 
 fork := true
-
 
 
 lazy val global = project.in(file("."))
@@ -55,6 +54,7 @@ lazy val commonDependencies = Seq (
     Dependencies.scalatest         % "test",
     Dependencies.scalatestFunsuite % "test"
 )
+
 
 
 

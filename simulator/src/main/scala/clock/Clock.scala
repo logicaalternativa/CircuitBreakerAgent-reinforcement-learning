@@ -17,6 +17,7 @@ trait Clock{
     def start: Unit
     def stop: Unit
     def isRunning: Boolean
+    
 }
 
 
@@ -26,9 +27,7 @@ private class ClockImp( implicit period: Period, numberPulses: NumberPulses, lis
    import org.slf4j._
    
    val logger = LoggerFactory.getLogger("com.logicaalternativa.circuitbreakeragent.clock.ClockImp");
-
-  
-   
+ 
    var started = true
    
    def executePulse( timestamp: Timestamp ) : Future[List[Unit]] =  Future.sequence { 

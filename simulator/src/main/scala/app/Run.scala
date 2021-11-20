@@ -1,7 +1,6 @@
 package com.logicaalternativa.circuitbreakeragent
 package app
 
-// import mother.clock.{Ti}
 import mother.data._
 import clock.Clock
 
@@ -9,7 +8,6 @@ object Run extends App {
     
   import report._
   import simulator._
-  // import functions._
   import circuitbreaker._
   import agent._
   import scala.util._
@@ -18,7 +16,6 @@ object Run extends App {
   import java.util.concurrent._
   
   import Config._
-  
   
   private def createCircuitBreaker( decored: Connector[DtoIn,Try, DtoOut] ): Connector[DtoIn,Try, DtoOut] = {
     
