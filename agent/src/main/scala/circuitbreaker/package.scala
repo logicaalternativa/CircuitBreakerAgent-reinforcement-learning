@@ -36,20 +36,17 @@ package circuitbreaker {
   
   case class ConfigCircuitBreaker( numberOfErrors: Int, timeout: Duration )
   
-  sealed trait CircuitBreakerState
+  enum CircuitBreakerState extends Enum[CircuitBreakerState]:  
+    case Closed, Open, HalfOpen
   
-  case object Closed extends CircuitBreakerState
-  case object Open extends CircuitBreakerState
-  case object HalfOpen extends CircuitBreakerState
-  
-  sealed trait CircuitBreakerActions 
-  
-  case object Ok extends CircuitBreakerActions
-  case object Ko extends CircuitBreakerActions
-  case object FailFast extends CircuitBreakerActions
-  case object AttemptReset extends CircuitBreakerActions
+  enum CircuitBreakerActions extends Enum[CircuitBreakerActions]:
+    case Ok, Ko, FailFast, AttemptReset
   
   object StateMachine {
+    
+    import CircuitBreakerState._
+    import CircuitBreakerActions._
+    
     def apply ( current: CircuitBreakerState ): CircuitBreakerActions => Try[CircuitBreakerState] = {
       
         action => {

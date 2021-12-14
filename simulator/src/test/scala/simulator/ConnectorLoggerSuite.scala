@@ -16,10 +16,11 @@ import mother.randomInt
 object ConnectorLoggerSuite {
   
   import functions._  
+  import Metric.Backend
   
-  implicit val ec: ExecutionContext = ExecutionContext.global
+  given ec: ExecutionContext = ExecutionContext.global
   
-  implicit val period : Period = Period( millis = 200 )
+  val period : Period = Period( millis = 200 )
   
   def reportInputSimulatorFactory = Mother.reportSimulatorFactory( Backend ) _
   
@@ -38,7 +39,9 @@ object ConnectorLoggerSuite {
 
 class ConnectorLoggerSuite extends AnyFunSuite {
   
+  
   import ConnectorLoggerSuite._
+  import ConnectorLoggerSuite.{ given ExecutionContext}
   import scala.concurrent.duration._
 
   

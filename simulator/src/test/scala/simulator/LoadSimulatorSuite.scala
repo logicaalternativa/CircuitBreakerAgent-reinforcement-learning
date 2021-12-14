@@ -18,6 +18,8 @@ import scala.language.postfixOps
 
 object LoadSimulatorSuite {
   
+  import Metric._
+  
   def connectorSimulatorMockFactory( expectedTs: Timestamp, expectedNumberCalls: Int )  = new NumberCalls[DtoIn] with Connector[DtoIn, Try, DtoOut]  {
     
     def apply( dto: DtoIn ) = {

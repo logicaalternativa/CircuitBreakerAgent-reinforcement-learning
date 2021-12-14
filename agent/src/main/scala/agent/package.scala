@@ -13,23 +13,35 @@ package agent {
   
   trait SmartConstructorDouble[T] extends SmartConstructor[Double, T] {
      
-      val error = "Value have to beteween 0 and 1" 
+      val error = "Value have to between 0 and 1" 
       def validation( value: Double ) = value >= 0 && value <= 1.0
      
    }
    
-  object Epsilon extends SmartConstructorDouble[Epsilon] {
-     
-   def instance( _value: Double ) = new Epsilon{ val value = _value } 
+  object Epsilon  {
+    
+    private val smartConstructor = new SmartConstructorDouble[Epsilon] {
+      
+      def instance( _value: Double ) = new Epsilon{ val value = _value } 
+      
+    }
+    
+    def apply( value: Double ) = smartConstructor( value )
  
   }
   
   
   sealed trait DiscountRate { val value: Double }
    
-  object DiscountRate extends SmartConstructorDouble[DiscountRate] {
-     
-   def instance( _value: Double ) = new DiscountRate{ val value = _value } 
+  object DiscountRate {
+    
+    private val smartConstructor = new SmartConstructorDouble[DiscountRate] {
+      
+      def instance( _value: Double ) = new DiscountRate{ val value = _value } 
+      
+    }
+    
+    def apply( value: Double ) = smartConstructor( value )
  
   }
   

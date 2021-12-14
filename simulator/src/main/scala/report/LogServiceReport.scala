@@ -43,6 +43,7 @@ object LogServiceReportImpl {
 class LogServiceReportImpl extends LogReport {
    
   import LogServiceReportImpl.{LoggerServiceBackend, LoggerServiceLoad, LoggerSignals, ReportId}
+  import Metric._
 
   
   private def createMessage(dtoIn: DtoIn, dtoOutT: Try[DtoOut], duration : Duration) : Option[String]  = dtoOutT match {

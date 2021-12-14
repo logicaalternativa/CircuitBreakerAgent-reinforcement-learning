@@ -15,7 +15,7 @@ object CircuitBreakerSuite {
   
   case class ExceptionDtoIn( dto: DtoIn ) extends Throwable
   
-  implicit val ec: ExecutionContext = ExecutionContext.global
+  given ec: ExecutionContext = ExecutionContext.global
   
   def connectorFactory( expectedResult: Try[DtoOut], delay: Duration = Duration.Zero ) = new Connector[DtoIn, Try, DtoOut] {
     
@@ -54,6 +54,7 @@ object CircuitBreakerSuite {
 class CircuitBreakerSuite extends AnyFunSuite {
   
   import CircuitBreakerSuite._
+  import CircuitBreakerSuite.{given ExecutionContext}
   import scala.language.postfixOps
   
   

@@ -9,7 +9,7 @@ import mother.clock._
 
 object Clock {
   
-    def apply( implicit period: Period, numberPulses: NumberPulses, listPulse: List[Pulse], executionContex: ExecutionContext ) : Clock= new ClockImp
+    def apply( using period: Period, numberPulses: NumberPulses, listPulse: List[Pulse], executionContex: ExecutionContext ) : Clock= new ClockImp
 }
 
 trait Clock{
@@ -21,7 +21,7 @@ trait Clock{
 }
 
 
-private class ClockImp( implicit period: Period, numberPulses: NumberPulses, listPulse: List[Pulse], executionContex: ExecutionContext ) extends Clock {
+private class ClockImp( using period: Period, numberPulses: NumberPulses, listPulse: List[Pulse], executionContex: ExecutionContext ) extends Clock {
   
    import Thread.sleep
    import org.slf4j._

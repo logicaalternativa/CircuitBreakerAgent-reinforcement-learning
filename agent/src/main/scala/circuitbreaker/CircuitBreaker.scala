@@ -8,6 +8,10 @@ import scala.concurrent.duration._
 
 import org.slf4j._
 import java.util.concurrent.atomic.{AtomicReference, AtomicInteger}
+
+import CircuitBreakerState._
+import CircuitBreakerActions._
+
   
 trait Connector[A, P[_], B]  extends (A => P[B])
 
@@ -34,7 +38,7 @@ object CircuitBreakerSync {
   val stateMachineOpen = StateMachine( Open )
   val stateMachineHalfOpen = StateMachine( HalfOpen )
   
-  def apply[A,B]( connector: Connector[A,Try,B], config: ConfigCircuitBreaker, errorOpenState: A => Throwable, learning: Learning)( implicit ec: ExecutionContext ) = new CircuitBreakerSync[A,B]( connector, config, errorOpenState, learning )
+  def apply[A,B]( connector: Connector[A,Try,B], config: ConfigCircuitBreaker, errorOpenState: A => Throwable, learning: Learning)( using ec: ExecutionContext ) = new CircuitBreakerSync[A,B]( connector, config, errorOpenState, learning )
   
   protected def calculateCallsError( isSuccesfull: Boolean, callsWithError: Int ) = 
   
@@ -110,7 +114,7 @@ object CircuitBreakerSync {
   
 }
 
-class CircuitBreakerSync[A, B]( connector: Connector[A,Try,B], config: ConfigCircuitBreaker, errorOpenState: A => Throwable, learning: Learning)( implicit ec: ExecutionContext )  extends Connector[A,Try,B] {
+class CircuitBreakerSync[A, B]( connector: Connector[A,Try,B], config: ConfigCircuitBreaker, errorOpenState: A => Throwable, learning: Learning)( using ec: ExecutionContext )  extends Connector[A,Try,B] {
   
   import CircuitBreakerSync._
   
@@ -128,7 +132,9 @@ class CircuitBreakerSync[A, B]( connector: Connector[A,Try,B], config: ConfigCir
     
     val action = learning.nextHalfOpenDuration( fromDuration )
     logger.info( s"[initState] first state ${fromDuration}, action: ${action}" )
+    
     val durationHalfOpen = action( fromDuration )
+    
     val infoLearning = InfoLearning( fromAction = action, fromDuration = DurationHalfOpen( fromDuration ) ) 
     (DurationHalfOpen( durationHalfOpen ), infoLearning )
     

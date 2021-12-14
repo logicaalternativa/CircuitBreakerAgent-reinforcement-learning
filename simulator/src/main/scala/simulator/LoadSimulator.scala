@@ -24,8 +24,9 @@ object LoadSimulator {
 
 class LoadSimulator(f: Int => Int)( implicit connector: Connector[DtoIn, Try, DtoOut], serviceReport: LogServiceReport, signalReport: LogSignalReport, ec: ExecutionContext ) extends Pulse {
   
-  private def sendRequest( timestamp: Timestamp ) : Future[Unit] = {
-    
+  import Metric._
+  
+  private def sendRequest( timestamp: Timestamp ) : Future[Unit] = {   
     
     val dtoIn = DtoIn( timestamp )
       

@@ -29,15 +29,18 @@ trait Agent[State] {
 
 trait Metrics[State] {
    
-   sealed trait Type 
-   case object Greedy extends Type
-   case object Epsilon extends Type
+   import Metrics._
+   
    
    def metricNext( tp: Type, from: State, to: Action[State]): Unit
    
 }
 
 object Metrics {
+   
+   enum Type :   
+      case Greedy, Epsilon
+   
    
    import org.slf4j._
    
@@ -95,6 +98,8 @@ class QAgent[State]( private val qs: List[Q[State]], private val stepSize: StepS
    
    import QAgent._
    
+   import Metrics.Type.{Greedy, Epsilon}
+   
    private var internalState: List[Q[State]] = qs
    
    private def maxNextValue( current: Q[State] ): Double = {
@@ -123,7 +128,7 @@ class QAgent[State]( private val qs: List[Q[State]], private val stepSize: StepS
          val res = getRandom( filtered ).action
          
          logger.info( s"Epsilon from $current -> $res" )
-         metric.metricNext( metric.Epsilon, current, res )
+         metric.metricNext( Epsilon, current, res )
          
          res
          
@@ -132,7 +137,7 @@ class QAgent[State]( private val qs: List[Q[State]], private val stepSize: StepS
          val res = getGreedy( internalState, current ).action 
          
          logger.info( s"Greedy from $current -> $res" )
-         metric.metricNext( metric.Greedy, current, res )
+         metric.metricNext( Greedy, current, res )
          
          res
          

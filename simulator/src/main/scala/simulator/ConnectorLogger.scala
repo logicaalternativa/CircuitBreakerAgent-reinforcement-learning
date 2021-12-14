@@ -17,7 +17,7 @@ object ConnectorLogger {
   
   import java.time.Instant  
   
-  def apply( f: FunctionLoad )( implicit period: Period, serviceReport: LogServiceReport, signalReport: LogSignalReport ): Pulse with Connector[DtoIn, Try, DtoOut] = new ConnectorLogger( f )
+  def apply( f: FunctionLoad )( using period: Period, serviceReport: LogServiceReport, signalReport: LogSignalReport ): Pulse with Connector[DtoIn, Try, DtoOut] = new ConnectorLogger( f )
   
   case class ExceptionNotPulse( dtoIn: DtoIn ) extends Throwable {
   
@@ -30,12 +30,13 @@ object ConnectorLogger {
 }
 
 
-class ConnectorLogger( f: FunctionLoad  )( implicit period: Period, serviceReport: LogServiceReport, signalReport: LogSignalReport) extends Pulse with Connector[DtoIn, Try, DtoOut]  {
+class ConnectorLogger( f: FunctionLoad  )( using period: Period, serviceReport: LogServiceReport, signalReport: LogSignalReport) extends Pulse with Connector[DtoIn, Try, DtoOut]  {
   
   import java.util.concurrent.atomic._
   import scala.annotation.tailrec
   import ConnectorLogger._
   import scala.util.Random
+  import Metric.Backend
   
   val atomicInt = new AtomicInteger(0)
   
