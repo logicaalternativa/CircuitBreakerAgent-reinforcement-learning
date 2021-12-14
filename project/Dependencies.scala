@@ -2,7 +2,7 @@ import sbt._
 
 object Dependencies {
  object versions {
-    val scalatest = "3.2.2"
+    val scalatest = "3.2.10"
 
   }
  val scalatest =  "org.scalatest" %% "scalatest" % versions.scalatest
